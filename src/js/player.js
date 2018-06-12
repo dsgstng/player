@@ -333,8 +333,12 @@ export default class DsgstngPlayer {
                         if (Hls.isSupported()) {
                             //console.log(globalHlsPlayer)
                             if (globalHlsPlayer) {
-                                if (Toast){
-                                    const a = new Toast({message: 'Switching quality, please wait',timeout: 2000});
+                                let once
+                                if (Toast) {
+                                    const a = new Toast({
+                                        message: 'Switching quality, please wait',
+                                        timeout: 2000
+                                    });
                                     a.show();
                                 }
                                 this.pause()
@@ -343,11 +347,17 @@ export default class DsgstngPlayer {
                                 globalHlsPlayer.loadSource(video.src);
                                 globalHlsPlayer.attachMedia(video);
                                 globalHlsPlayer.startLoad()
-                                globalHlsPlayer.on(Hls.Events.MANIFEST_PARSED,() => {
-                                    this.play()
-                                    if (Toast){
-                                        const a = new Toast({message: 'Quality switched',timeout: 2000});
-                                        a.show();
+                                globalHlsPlayer.on(Hls.Events.MANIFEST_PARSED, () => {
+                                    if (!once) {
+                                        once = true
+                                        this.play()
+                                        if (Toast) {
+                                            const a = new Toast({
+                                                message: 'Quality switched',
+                                                timeout: 2000
+                                            });
+                                            a.show();
+                                        }
                                     }
                                 });
                             } else {
