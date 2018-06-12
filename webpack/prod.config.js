@@ -12,7 +12,7 @@ module.exports = {
     devtool: 'source-map',
 
     entry: {
-        'dsgstng-player': './src/js/index.js'
+        'DsgstngPlayer': './src/js/index.js'
     },
 
     output: {
@@ -23,6 +23,10 @@ module.exports = {
         libraryExport: 'default',
         umdNamedDefine: true,
         publicPath: '/'
+    },
+
+    externals:{
+        toast: 'Toast'
     },
 
     resolve: {

@@ -60,6 +60,8 @@ class Template {
         this.danmakuOpacityBox = this.container.querySelector('.dplayer-setting-danmaku');
         this.dtime = this.container.querySelector('.dplayer-dtime');
         this.controller = this.container.querySelector('.dplayer-controller');
+        this.commentSettingBox = this.container.querySelector('.dplayer-comment-setting-box');
+        this.commentSettingButton = this.container.querySelector('.dplayer-comment-setting-icon');
         this.browserFullButton = this.container.querySelector('.dplayer-full-icon');
         this.webFullButton = this.container.querySelector('.dplayer-full-in-icon');
         this.menu = this.container.querySelector('.dplayer-menu');

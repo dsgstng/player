@@ -9,7 +9,7 @@ module.exports = {
     devtool: 'cheap-module-source-map',
 
     entry: {
-        'dsgstng-player': './src/js/index.js'
+        'DsgstngPlayer': './src/js/index.js'
     },
 
     output: {

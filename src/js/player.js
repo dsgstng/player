@@ -22,9 +22,10 @@ import InfoPanel from './info-panel';
 import tplVideo from '../template/video.art';
 
 let index = 0;
+let globalHlsPlayer;
 const instances = [];
 
-class DPlayer {
+export default class DsgstngPlayer {
 
     /**
      * DPlayer constructor function
@@ -117,7 +118,6 @@ class DPlayer {
         document.addEventListener('click', () => {
             this.focus = false;
         }, true);
-
         this.container.addEventListener('click', () => {
             this.focus = true;
         }, true);
@@ -314,7 +314,6 @@ class DPlayer {
                 console.error(`Illegal customType: ${type}`);
             }
         } else {
-            console.log(video,this.options.video)
             if (this.type === 'auto') {
                 if (/m3u8(#|\?|$)/i.exec(video.src)) {
                     this.type = 'hls';
@@ -326,15 +325,36 @@ class DPlayer {
                     this.type = 'normal';
                 }
             }
-
+            //console.log(video, this.video, Hls)
             switch (this.type) {
                 // https://github.com/video-dev/hls.js
                 case 'hls':
                     if (Hls) {
                         if (Hls.isSupported()) {
-                            const hls = new Hls();
-                            hls.loadSource(video.src);
-                            hls.attachMedia(video);
+                            //console.log(globalHlsPlayer)
+                            if (globalHlsPlayer) {
+                                if (Toast){
+                                    const a = new Toast({message: 'Switching quality, please wait',timeout: 2000});
+                                    a.show();
+                                }
+                                this.pause()
+                                globalHlsPlayer.stopLoad()
+                                globalHlsPlayer.detachMedia()
+                                globalHlsPlayer.loadSource(video.src);
+                                globalHlsPlayer.attachMedia(video);
+                                globalHlsPlayer.startLoad()
+                                globalHlsPlayer.on(Hls.Events.MANIFEST_PARSED,() => {
+                                    this.play()
+                                    if (Toast){
+                                        const a = new Toast({message: 'Quality switched',timeout: 2000});
+                                        a.show();
+                                    }
+                                });
+                            } else {
+                                globalHlsPlayer = new Hls();
+                                globalHlsPlayer.loadSource(video.src);
+                                globalHlsPlayer.attachMedia(video);
+                            }
                         } else {
                             this.notice('Error: Hls is not supported.');
                         }
@@ -367,6 +387,29 @@ class DPlayer {
                         dashjs.MediaPlayer().create().initialize(video, video.src, false);
                     } else {
                         this.notice('Error: Can\'t find dashjs.');
+                    }
+                    break;
+
+                    // https://github.com/webtorrent/webtorrent
+                case 'webtorrent':
+                    if (WebTorrent) {
+                        if (WebTorrent.WEBRTC_SUPPORT) {
+                            this.container.classList.add('dplayer-loading');
+                            const client = new WebTorrent();
+                            const torrentId = video.src;
+                            client.add(torrentId, (torrent) => {
+                                const file = torrent.files.find((file) => file.name.endsWith('.mp4'));
+                                file.renderTo(this.video, {
+                                    autoplay: this.options.autoplay
+                                }, () => {
+                                    this.container.classList.remove('dplayer-loading');
+                                });
+                            });
+                        } else {
+                            this.notice('Error: Webtorrent is not supported.');
+                        }
+                    } else {
+                        this.notice('Error: Can\'t find Webtorrent.');
                     }
                     break;
             }
@@ -530,5 +573,3 @@ class DPlayer {
         }
     }
 }
-
-export default DPlayer;
