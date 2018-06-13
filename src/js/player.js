@@ -324,10 +324,6 @@ export default class DsgstngPlayer {
                 }
             }
 
-            if (this.type === 'hls' && (video.canPlayType('application/x-mpegURL') || video.canPlayType('application/vnd.apple.mpegURL'))) {
-                this.type = 'normal';
-            }
-
             switch (this.type) {
                 // https://github.com/video-dev/hls.js
                 case 'hls':

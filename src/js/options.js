@@ -52,7 +52,7 @@ export default (options) => {
             player.infoPanel.triggle();
         }
     },
-    {
+    { 
         text: `DsgstngPlayer v${DPLAYER_VERSION}`,
         link: 'https://github.com/dsgstng/player'
     }
