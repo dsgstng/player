@@ -210,7 +210,7 @@ class Controller {
                     dataURL = URL.createObjectURL(blob);
                     const link = document.createElement('a');
                     link.href = dataURL;
-                    link.download = 'DPlayer.png';
+                    link.download = 'shot.png';
                     link.style.display = 'none';
                     document.body.appendChild(link);
                     link.click();
