@@ -1,8 +1,8 @@
 .dplayer-menu {
     position: absolute;
     width: 170px;
-    border-radius: 2px;
-    background: rgba(28, 28, 28, 0.85);
+    border-radius: 3px;
+    background: var(--transparent-dark-background, rgba(28, 28, 28, 0.85));
     padding: 5px 0;
     overflow: hidden;
     z-index: 3;
@@ -15,13 +15,15 @@
         box-sizing: border-box;
         cursor: pointer;
         &:hover {
-            background-color: rgba(255, 255, 255, .1);
+            background-color: var(--light-grey, rgba(255, 255, 255, .1));
+            border-left: var(--main-theme-color,#00b11f) 2px solid;
+            border-right: var(--main-theme-color,#00b11f) 2px solid;
         }
         a {
             display: inline-block;
             padding: 0 10px;
             line-height: 30px;
-            color: #eee;
+            color: var(--white-color, #eee);
             font-size: 13px;
             display: inline-block;
             vertical-align: middle;

@@ -38,7 +38,7 @@
         }
         .dplayer-bar-preview {
             position: absolute;
-            background: #fff;
+            background: var(--white-color,#fff);
             pointer-events: none;
             display: none;
             background-size: auto 100%;
@@ -60,8 +60,8 @@
             width: 30px;
             border-radius: 4px;
             padding: 5px 7px;
-            background-color: rgba(0, 0, 0, 0.62);
-            color: #fff;
+            background-color: var(--transparent-dark-background,rgba(0, 0, 0, 0.62));
+            color: var(--white-color,#fff);
             font-size: 12px;
             text-align: center;
             opacity: 1;
@@ -123,119 +123,21 @@
             bottom: 0;
             left: 20px;
             right: 20px;
-            color: #fff;
+            color: var(--white-color,#fff);
             .dplayer-icon {
-                padding: 7px;
+                display: none;
             }
             .dplayer-comment-setting-icon {
-                position: absolute;
-                left: 0;
-                top: 0;
+                display: none;
             }
             .dplayer-send-icon {
-                position: absolute;
-                right: 0;
-                top: 0;
+                display: none;
             }
             .dplayer-comment-setting-box {
-                position: absolute;
-                background: rgba(28, 28, 28, 0.9);
-                bottom: 41px;
-                left: 0;
-                box-shadow: 0 0 25px rgba(0, 0, 0, .3);
-                border-radius: 4px;
-                padding: 10px 10px 16px;
-                font-size: 14px;
-                width: 204px;
-                transition: all .3s ease-in-out;
-                transform: scale(0);
-                &.dplayer-comment-setting-open {
-                    transform: scale(1);
-                }
-                input[type=radio] {
-                    display: none;
-                }
-                label {
-                    cursor: pointer;
-                }
-                .dplayer-comment-setting-title {
-                    font-size: 13px;
-                    color: #fff;
-                    line-height: 30px;
-                }
-                .dplayer-comment-setting-type {
-                    font-size: 0;
-                    .dplayer-comment-setting-title {
-                        margin-bottom: 6px;
-                    }
-                    label {
-                        &:nth-child(2) {
-                            span {
-                                border-radius: 4px 0 0 4px;
-                            }
-                        }
-                        &:nth-child(4) {
-                            span {
-                                border-radius: 0 4px 4px 0;
-                            }
-                        }
-                    }
-                    span {
-                        width: 33%;
-                        padding: 4px 6px;
-                        line-height: 16px;
-                        display: inline-block;
-                        font-size: 12px;
-                        color: #fff;
-                        border: 1px solid #fff;
-                        margin-right: -1px;
-                        box-sizing: border-box;
-                        text-align: center;
-                        cursor: pointer;
-                    }
-                    input:checked+span {
-                        background: #E4E4E6;
-                        color: #1c1c1c;
-                    }
-                }
-                .dplayer-comment-setting-color {
-                    font-size: 0;
-                    label {
-                        font-size: 0;
-                        padding: 6px;
-                        display: inline-block;
-                    }
-                    span {
-                        width: 22px;
-                        height: 22px;
-                        display: inline-block;
-                        border-radius: 50%;
-                        box-sizing: border-box;
-                        cursor: pointer;
-                        &:hover {
-                            animation: my-face 5s infinite ease-in-out;
-                        }
-                    }
-                }
+                display: none;
             }
             .dplayer-comment-input {
-                outline: none;
-                border: none;
-                padding: 8px 31px;
-                font-size: 14px;
-                line-height: 18px;
-                text-align: center;
-                border-radius: 4px;
-                background: none;
-                margin: 0;
-                height: 100%;
-                box-sizing: border-box;
-                width: 100%;
-                color: #fff;
-                &::placeholder {
-                    color: #fff;
-                    opacity: 0.8;
-                }
+                display: none;
             }
         }
         &.dplayer-icons-left {
@@ -287,7 +189,7 @@
                 }
             }
             &.dplayer-quality-icon {
-                color: #fff;
+                color: var(--all-white-color,#fff);
                 width: auto;
                 line-height: 22px;
                 font-size: 14px;
@@ -373,7 +275,7 @@
                 transform: scale(0);
                 width: 150px;
                 border-radius: 2px;
-                background: rgba(28, 28, 28, 0.9);
+                background: var(--transparent-dark-background,rgba(28, 28, 28, 0.9));
                 padding: 7px 0;
                 transition: all .3s ease-in-out;
                 overflow: hidden;
@@ -446,7 +348,7 @@
                         top: 8.5px;
                         width: 100%;
                         height: 3px;
-                        background: #fff;
+                        background: var(--all-white-color,#fff);
                         transition: all 0.3s ease-in-out;
                         .dplayer-danmaku-bar-inner {
                             position: absolute;
@@ -454,7 +356,7 @@
                             left: 0;
                             height: 100%;
                             transition: all 0.1s ease;
-                            background: #aaa;
+                            background: var(--main-theme-color, #00b11f);;
                             will-change: width;
                             .dplayer-thumb {
                                 position: absolute;
@@ -467,7 +369,7 @@
                                 border-radius: 50%;
                                 cursor: pointer;
                                 transition: all .3s ease-in-out;
-                                background: #aaa;
+                                background: var(--main-theme-color, #00b11f);;
                             }
                         }
                     }
@@ -515,21 +417,22 @@
                 display: none;
                 font-size: 12px;
                 width: 80px;
-                border-radius: 2px;
-                background: rgba(28, 28, 28, 0.9);
+                border-radius: 3px;
+                background: var(--transparent-dark-background,rgba(28, 28, 28, 0.9));
                 padding: 5px 0;
                 transition: all .3s ease-in-out;
                 overflow: hidden;
-                color: #fff;
+                color: var(--white-color,#fff);
                 text-align: center;
             }
             .dplayer-quality-item {
+                color: var(--white-color,#fff);
                 height: 25px;
                 box-sizing: border-box;
                 cursor: pointer;
                 line-height: 25px;
                 &:hover {
-                    background-color: rgba(255, 255, 255, .1);
+                    background-color: var(--light-grey,rgba(255, 255, 255, .1));
                 }
             }
         }
@@ -538,7 +441,7 @@
             height: 100%;
         }
         .dplayer-label {
-            color: #eee;
+            color: var(--white-color,#eee);
             font-size: 13px;
             display: inline-block;
             vertical-align: middle;
@@ -561,8 +464,8 @@
             input+label {
                 display: inline-block;
                 position: relative;
-                box-shadow: rgb(223, 223, 223) 0 0 0 0 inset;
-                border: 1px solid rgb(223, 223, 223);
+                box-shadow: var(--mid-grey,rgb(223, 223, 223)) 0 0 0 0 inset;
+                border: 1px solid var(--main-theme-color, #00b11f);
                 height: 20px;
                 width: 32px;
                 border-radius: 10px;
@@ -588,7 +491,7 @@
                 left: 0;
                 top: 0;
                 border-radius: 15px;
-                background: #fff;
+                background: var(--main-theme-color, #00b11f);
                 transition: .2s ease-in-out;
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
                 height: 18px;

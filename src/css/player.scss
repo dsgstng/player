@@ -14,14 +14,14 @@
         
         path,
         circle {
-            fill: #fff;
+            fill: var(--all-white-color,#fff);
         }
     }
 
     &:-webkit-full-screen {
         width: 100%;
         height: 100%;
-        background: #000;
+        background: var(--main-background,#000);
         position: fixed;
         z-index: 100000;
         left: 0;

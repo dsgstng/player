@@ -5,7 +5,7 @@
     top: 0;
     bottom: 0;
     font-size: 22px;
-    color: #fff;
+    color: var(--white-color,#fff);
     pointer-events: none;
     .dplayer-bezel-icon {
         position: absolute;
@@ -16,7 +16,7 @@
         width: 52px;
         padding: 12px;
         box-sizing: border-box;
-        background: rgba(0, 0, 0, .5);
+        background: var(--transparent-dark-background,rgba(0, 0, 0, .5));
         border-radius: 50%;
         opacity: 0;
         pointer-events: none;

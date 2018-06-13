@@ -1,7 +1,7 @@
 {
-  "name": "dsgstng-player",
-  "version": "0.0.3",
-  "description": "Wow, such a lovely HTML5 danmaku video player",
+  "name": "DsgstngPlayer",
+  "version": "0.0.4",
+  "description": "Dplayer fork",
   "main": "dist/dsgstng-player.min.js",
   "style": "dist/dsgstng-player.min.css",
   "scripts": {

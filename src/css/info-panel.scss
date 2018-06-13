@@ -3,9 +3,9 @@
     top: 10px;
     left: 10px;
     width: 400px;
-    background: rgba(28, 28, 28, 0.8);
+    background: var(--transparent-dark-background,rgba(28, 28, 28, 0.8));
     padding: 10px;
-    color: #fff;
+    color: var(--all-white-color,#fff);
     font-size: 12px;
     border-radius: 2px;
 

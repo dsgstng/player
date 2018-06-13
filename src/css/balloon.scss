@@ -6,7 +6,8 @@
 
 [data-balloon]:after {
     padding: 0.3em 0.7em;
-    background: rgba(17, 17, 17, 0.7);
+    color: var(--white-color,#fff);
+    background: var(--main-background,rgba(17, 17, 17, 0.7))
 }
 
 [data-balloon][data-balloon-pos="up"]:after {
