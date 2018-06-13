@@ -13,7 +13,7 @@ export default (options) => {
         lang: (navigator.language || navigator.browserLanguage).toLowerCase(),
         screenshot: false,
         hotkey: true,
-        preload: 'auto',
+        preload: 'metadata',
         volume: 0.7,
         apiBackend: defaultApiBackend,
         video: {},
@@ -47,16 +47,16 @@ export default (options) => {
     }
 
     options.contextmenu = options.contextmenu.concat([{
-            text: 'Video info',
-            click: (player) => {
-                player.infoPanel.triggle();
-            }
-        },
-        {
-            text: `DsgstngPlayer v${DPLAYER_VERSION}`,
-            link: 'https://github.com/dsgstng/player'
+        text: 'Video info',
+        click: (player) => {
+            player.infoPanel.triggle();
         }
-    ]);
+    },
+    {
+        text: `DsgstngPlayer v${DPLAYER_VERSION}`,
+        link: 'https://github.com/dsgstng/player'
+    }
+]);
 
     return options;
 };

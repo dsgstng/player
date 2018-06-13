@@ -41,7 +41,7 @@
             background: var(--white-color,#fff);
             pointer-events: none;
             display: none;
-            background-size: auto 100%;
+            background-size: 16000px 100%;
         }
         .dplayer-bar-preview-canvas {
             position: absolute;
@@ -356,7 +356,7 @@
                             left: 0;
                             height: 100%;
                             transition: all 0.1s ease;
-                            background: var(--main-theme-color, #00b11f);;
+                            background: var(--main-theme-color, #00b11f);
                             will-change: width;
                             .dplayer-thumb {
                                 position: absolute;
@@ -369,7 +369,7 @@
                                 border-radius: 50%;
                                 cursor: pointer;
                                 transition: all .3s ease-in-out;
-                                background: var(--main-theme-color, #00b11f);;
+                                background: var(--main-theme-color, #00b11f);
                             }
                         }
                     }

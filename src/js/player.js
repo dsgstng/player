@@ -11,7 +11,7 @@ import FullScreen from './fullscreen';
 import User from './user';
 import Subtitle from './subtitle';
 import Bar from './bar';
-import Time from './time';
+import Timer from './timer';
 import Bezel from './bezel';
 import Controller from './controller';
 import Setting from './setting';
@@ -124,7 +124,7 @@ export default class DsgstngPlayer {
 
         this.paused = true;
 
-        this.time = new Time(this);
+        this.timer = new Timer(this);
 
         this.hotkey = new HotKey(this);
 
@@ -163,6 +163,7 @@ export default class DsgstngPlayer {
         }
 
         this.bar.set('played', time / this.video.duration, 'width');
+        this.template.ptime.innerHTML = utils.secondToTime(time);
     }
 
     /**
@@ -180,8 +181,7 @@ export default class DsgstngPlayer {
         playedPromise.catch(() => {
             this.pause();
         }).then(() => {});
-        this.time.enable('loading');
-        this.time.enable('progress');
+        this.timer.enable('loading');
         this.container.classList.remove('dplayer-paused');
         this.container.classList.add('dplayer-playing');
         if (this.danmaku) {
@@ -207,11 +207,9 @@ export default class DsgstngPlayer {
             this.bezel.switch(Icons.pause);
         }
 
-        this.ended = false;
         this.template.playButton.innerHTML = Icons.play;
         this.video.pause();
-        this.time.disable('loading');
-        this.time.disable('progress');
+        this.timer.disable('loading');
         this.container.classList.remove('dplayer-playing');
         this.container.classList.add('dplayer-paused');
         if (this.danmaku) {
@@ -325,7 +323,11 @@ export default class DsgstngPlayer {
                     this.type = 'normal';
                 }
             }
-            //console.log(video, this.video, Hls)
+
+            if (this.type === 'hls' && (video.canPlayType('application/x-mpegURL') || video.canPlayType('application/vnd.apple.mpegURL'))) {
+                this.type = 'normal';
+            }
+
             switch (this.type) {
                 // https://github.com/video-dev/hls.js
                 case 'hls':
@@ -451,11 +453,9 @@ export default class DsgstngPlayer {
         });
 
         // video end
-        this.ended = false;
         this.on('ended', () => {
             this.bar.set('played', 1, 'width');
             if (!this.setting.loop) {
-                this.ended = true;
                 this.pause();
             } else {
                 this.seek(0);
@@ -475,6 +475,14 @@ export default class DsgstngPlayer {
         this.on('pause', () => {
             if (!this.paused) {
                 this.pause();
+            }
+        });
+
+        this.on('timeupdate', () => {
+            this.bar.set('played', this.video.currentTime / this.video.duration, 'width');
+            const currentTime = utils.secondToTime(this.video.currentTime);
+            if (this.template.ptime.innerHTML !== currentTime) {
+                this.template.ptime.innerHTML = currentTime;
             }
         });
 
@@ -571,15 +579,14 @@ export default class DsgstngPlayer {
         instances.splice(instances.indexOf(this), 1);
         this.pause();
         this.controller.destroy();
-        this.time.destroy();
+        this.timer.destroy();
         this.video.src = '';
         this.container.innerHTML = '';
         this.events.trigger('destroy');
+    }
 
-        for (const key in this) {
-            if (this.hasOwnProperty(key) && key !== 'paused') {
-                delete this[key];
-            }
-        }
+    static get version() {
+        /* global DPLAYER_VERSION */
+        return DPLAYER_VERSION;
     }
 }
