@@ -331,14 +331,9 @@ export default class DsgstngPlayer {
                         if (Hls.isSupported()) {
                             //console.log(globalHlsPlayer)
                             if (globalHlsPlayer) {
-                                let once
-                                if (Toast) {
-                                    const a = new Toast({
-                                        message: 'Switching quality, please wait',
-                                        timeout: 2000
-                                    });
-                                    a.show();
-                                }
+                                let once,
+                                    errorOnce
+                                this.notice('Switching quality, please wait')
                                 this.pause()
                                 globalHlsPlayer.stopLoad()
                                 globalHlsPlayer.detachMedia()
@@ -349,17 +344,36 @@ export default class DsgstngPlayer {
                                     if (!once) {
                                         once = true
                                         this.play()
-                                        if (Toast) {
-                                            const a = new Toast({
-                                                message: 'Quality switched',
-                                                timeout: 2000
-                                            });
-                                            a.show();
-                                        }
                                     }
                                 });
+                                globalHlsPlayer.on(Hls.Events.ERROR, (dat) => {
+                                    setTimeout(() => {
+                                        if (!once && !errorOnce) {
+                                            once = true
+                                            errorOnce = true
+                                            console.error(dat)
+                                            this.notice('Quality error', 3000)
+                                            this.switchQuality(this.options.video.defaultQuality)
+                                            if (Toast) {
+                                                new Toast({
+                                                    message: 'Quality error. Switching to default quality',
+                                                    timeout: 3000
+                                                }).show()
+                                            }
+                                        }
+                                    }, 3000)
+                                })
                             } else {
-                                globalHlsPlayer = new Hls();
+                                globalHlsPlayer = new Hls({
+                                    xhrSetup: function (xhr) {
+                                        xhr.withCredentials = true; // do send cookies
+                                    },
+                                    fetchSetup: function (context, initParams) {
+                                        // Always send cookies, even for cross-origin calls.
+                                        initParams.credentials = 'include';
+                                        return new Request(context.url, initParams);
+                                    }
+                                });
                                 globalHlsPlayer.loadSource(video.src);
                                 globalHlsPlayer.attachMedia(video);
                             }

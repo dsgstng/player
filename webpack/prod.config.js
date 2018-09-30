@@ -39,12 +39,6 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                enforce: 'pre',
-                loader: 'eslint-loader',
-                include: path.resolve(__dirname, '../src/js'),
-            },
-            {
-                test: /\.js$/,
                 use: [
                     'template-string-optimize-loader',
                     {

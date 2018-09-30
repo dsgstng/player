@@ -1,7 +1,7 @@
 import '../css/index.scss';
 import DsgstngPlayer from './player';
 
-/* global DPLAYER_VERSION GIT_HASH */
-console.log(`${'\n'} %c DsgstngPlayer v${DPLAYER_VERSION} ${GIT_HASH} %c https://dsgstng.com ${'\n'}${'\n'}`, 'color: var(--main-theme-color); background: var(--main-background); padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+console.log(`%c DsgstngPlayer v${require('../../package.json').version} %c https://dsgstng.com ${'\n'}`,
+'color: #00b11f; background: #e7e7e7; padding:2px;', 'background: #00b11f; padding:2px;');
 
 export default DsgstngPlayer;

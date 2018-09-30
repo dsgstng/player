@@ -29,12 +29,7 @@ module.exports = {
 
     module: {
         strictExportPresence: true,
-        rules: [{
-                test: /\.js$/,
-                enforce: 'pre',
-                loader: require.resolve('eslint-loader'),
-                include: path.resolve(__dirname, '../src/js'),
-            },
+        rules: [
             {
                 test: /\.js$/,
                 use: [{
