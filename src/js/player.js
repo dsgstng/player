@@ -367,11 +367,6 @@ export default class DsgstngPlayer {
                                 globalHlsPlayer = new Hls({
                                     xhrSetup: function (xhr) {
                                         xhr.withCredentials = true; // do send cookies
-                                    },
-                                    fetchSetup: function (context, initParams) {
-                                        // Always send cookies, even for cross-origin calls.
-                                        initParams.credentials = 'include';
-                                        return new Request(context.url, initParams);
                                     }
                                 });
                                 globalHlsPlayer.loadSource(video.src);
